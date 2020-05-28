@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
 		euroLabel.setBounds(30, 150, 150, 20);
 		currencyPanel.add(euroLabel);
 
-		euroCurrencyTF.setBounds(200, 150, 150, 20);
+		euroCurrencyTF.setBounds(200, 150, 170, 20);
 		euroCurrencyTF.setFont(new Font("Dialog", Font.BOLD, 15));
 		euroCurrencyTF.setBorder(new LineBorder(Color.BLACK, 1));
 		euroCurrencyTF.setHorizontalAlignment(JTextField.CENTER);
@@ -169,7 +169,7 @@ public class MainWindow extends JFrame {
 				languageLabel.setText("       Język :");
 				chooseCurrencyLabel.setText("Wybierz walutę :");
 				euroLabel.setText("Kwota w Euro :");
-				anotherCurrencyLabel.setText("Kwota po przeliczeniu :");
+				anotherCurrencyLabel.setText("Przeliczona kwota :");
 				closeAppButton.setText("Zamknij aplikację");
 				setTitle("Atos - Kalkulator walutowy - Tomasz Czopur");
 				
@@ -226,7 +226,7 @@ public class MainWindow extends JFrame {
 
 				char c = evt.getKeyChar();
 
-				String weightString = euroCurrencyTF.getText();
+				String tempString = euroCurrencyTF.getText();
 
 				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
 						|| (c == KeyEvent.VK_PERIOD) || (c == KeyEvent.VK_COMMA))) {
@@ -237,29 +237,35 @@ public class MainWindow extends JFrame {
 					evt.setKeyChar((char) KeyEvent.VK_PERIOD);
 				}
 
-				if (weightString.equals("00")) {
+				if (tempString.equals("00")) {
 					euroCurrencyTF.setText("");
 				}
 
-				if (weightString.equals(".")) {
+				if (tempString.equals(".")) {
 					euroCurrencyTF.setText("0.");
 				}
 
-				if (weightString.length() > 1 && weightString.charAt(0) == KeyEvent.VK_0
-						&& weightString.charAt(1) != KeyEvent.VK_PERIOD) {
-					euroCurrencyTF.setText("0." + weightString.substring(1));
+				if (tempString.length() > 1 && tempString.charAt(0) == KeyEvent.VK_0
+						&& tempString.charAt(1) != KeyEvent.VK_PERIOD) {
+					euroCurrencyTF.setText("0." + tempString.substring(1));
 				}
 
-				if (weightString.equals("")) {
+				if (tempString.equals("")) {
 					anotherCurrencyTF.setText("");
 				}
 
-				if (!weightString.equals("")) {
+				if (!tempString.equals("")) {
 					if (currencyList.getSelectedItem() != null) {
 						refreshResult();
 					}
 				}
 
+				if (tempString.contains(".")) {
+					String[] tempStringTable = tempString.toString().split("\\.");
+					if (tempStringTable.length > 1 && tempStringTable[1].length() > 2) {
+						euroCurrencyTF.setText(tempStringTable[0] + "." + tempStringTable[1].substring(0,2));
+					}
+				}
 			}
 
 			@Override
@@ -267,7 +273,7 @@ public class MainWindow extends JFrame {
 
 				char c = evt.getKeyChar();
 
-				String weightString = euroCurrencyTF.getText();
+				String tempString = euroCurrencyTF.getText();
 
 				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
 						|| (c == KeyEvent.VK_PERIOD) || (c == KeyEvent.VK_COMMA))) {
@@ -278,11 +284,11 @@ public class MainWindow extends JFrame {
 					evt.setKeyChar((char) KeyEvent.VK_PERIOD);
 				}
 
-				if (weightString.contains(".") && c == KeyEvent.VK_PERIOD) {
+				if (tempString.contains(".") && c == KeyEvent.VK_PERIOD) {
 					evt.consume();
 				}
 
-				if (weightString.contains(".") && c == KeyEvent.VK_COMMA) {
+				if (tempString.contains(".") && c == KeyEvent.VK_COMMA) {
 					evt.consume();
 				}
 			}
