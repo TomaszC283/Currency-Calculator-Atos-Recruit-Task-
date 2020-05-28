@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
 		euroLabel.setBounds(30, 150, 150, 20);
 		currencyPanel.add(euroLabel);
 
-		euroCurrencyTF.setBounds(200, 150, 170, 20);
+		euroCurrencyTF.setBounds(200, 150, 150, 20);
 		euroCurrencyTF.setFont(new Font("Dialog", Font.BOLD, 15));
 		euroCurrencyTF.setBorder(new LineBorder(Color.BLACK, 1));
 		euroCurrencyTF.setHorizontalAlignment(JTextField.CENTER);

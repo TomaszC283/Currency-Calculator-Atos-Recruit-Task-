@@ -2,7 +2,7 @@
  * Atos - Recruitment task 
  * @Autor - Tomasz Czopur
  * EUR Currency calculator
- * version 1.0 ( 28.05.2020 )
+ * version 1.2 ( 28.05.2020 )
  */
 
 package atos.recruitment.main;
