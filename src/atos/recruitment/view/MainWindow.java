@@ -226,7 +226,7 @@ public class MainWindow extends JFrame {
 
 				char c = evt.getKeyChar();
 
-				String tempString = euroCurrencyTF.getText();
+				String tempString = euroCurrencyTF.getText().replace(",", ".").replace(" ", "");
 
 				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
 						|| (c == KeyEvent.VK_PERIOD) || (c == KeyEvent.VK_COMMA))) {
@@ -266,6 +266,7 @@ public class MainWindow extends JFrame {
 						euroCurrencyTF.setText(tempStringTable[0] + "." + tempStringTable[1].substring(0,2));
 					}
 				}
+				
 			}
 
 			@Override
@@ -273,7 +274,7 @@ public class MainWindow extends JFrame {
 
 				char c = evt.getKeyChar();
 
-				String tempString = euroCurrencyTF.getText();
+				String tempString = euroCurrencyTF.getText().replace(",", ".").replace(" ", "");
 
 				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
 						|| (c == KeyEvent.VK_PERIOD) || (c == KeyEvent.VK_COMMA))) {
@@ -291,6 +292,7 @@ public class MainWindow extends JFrame {
 				if (tempString.contains(".") && c == KeyEvent.VK_COMMA) {
 					evt.consume();
 				}
+				
 			}
 		});
 	}
@@ -336,7 +338,7 @@ public class MainWindow extends JFrame {
 			currencyRate = CurrencyRepository.currencyValues.get(currencyList.getSelectedItem());
 
 			anotherCurrencyTF
-					.setText(String.format("%.2f", CurrencyConverter.CurrencyExchange(euroAmount, currencyRate)));
+					.setText(String.format("%,.2f", CurrencyConverter.CurrencyExchange(euroAmount, currencyRate)));
 		}
 	}
 }
